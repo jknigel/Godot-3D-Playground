@@ -1,3 +1,6 @@
-# Godot 4+ specific ignores
+.import
+logs/
 .godot/
-/android/
+.vscode/
+*.tmp
+*.log
