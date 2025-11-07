@@ -1,10 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://2wap0283yk0r"]
+[gd_scene load_steps=13 format=3 uid="uid://2wap0283yk0r"]
 
 [ext_resource type="Script" uid="uid://cfb7xo35cn5fo" path="res://main.gd" id="1_h2yge"]
 [ext_resource type="PackedScene" uid="uid://ceuu150fmggvr" path="res://player.tscn" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://defdm2qdva75q" path="res://mob.tscn" id="2_1bvp3"]
 [ext_resource type="FontFile" uid="uid://cyxhh7ddkn62q" path="res://fonts/Montserrat-Medium.ttf" id="4_lquwl"]
 [ext_resource type="Script" uid="uid://bq4lq2wbf1rkc" path="res://score_label.gd" id="5_7mycd"]
+[ext_resource type="Script" uid="uid://ch1bdv3bspou" path="res://high_score_label.gd" id="6_7mycd"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_7dm0k"]
 size = Vector3(60, 2, 60)
@@ -115,21 +116,83 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.42745098)
+script = ExtResource("6_7mycd")
 
 [node name="RetryLabel" type="Label" parent="UserInterface/Retry"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -111.0
+offset_top = -28.0
+offset_right = 111.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Press Enter to Retry"
+
+[node name="Label" type="Label" parent="UserInterface/Retry"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -111.0
-offset_top = -14.0
-offset_right = 111.0
-offset_bottom = 14.0
+offset_left = -78.0
+offset_top = -162.0
+offset_right = 60.0
+offset_bottom = -134.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "Press Enter to Retry"
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "High Scores:"
+
+[node name="ScoreListContainer" type="VBoxContainer" parent="UserInterface/Retry"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="NameInputPanel" type="PanelContainer" parent="UserInterface"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UserInterface/NameInputPanel"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="UserInterface/NameInputPanel/VBoxContainer"]
+layout_mode = 2
+text = "New High Score!"
+horizontal_alignment = 1
+
+[node name="NameInput" type="LineEdit" parent="UserInterface/NameInputPanel/VBoxContainer"]
+layout_mode = 2
+placeholder_text = "Enter Name"
+max_length = 10
+
+[node name="NameSubmitButton" type="Button" parent="UserInterface/NameInputPanel/VBoxContainer"]
+layout_mode = 2
+text = "Submit"
 
 [connection signal="hit" from="Player" to="." method="_on_player_hit"]
 [connection signal="timeout" from="MobTimer" to="." method="_on_mob_timer_timeout"]
